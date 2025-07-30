@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación: Gestión de Inventarios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-800 text-white flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-5xl h-[600px] bg-gradient-to-br from-gray-900 to-slate-800 rounded-2xl shadow-2xl p-8 flex flex-col relative overflow-hidden">
+        
+        <!-- Slides Container -->
+        <div id="slides-container" class="flex-grow flex items-center justify-center">
+
+            <!-- Slide 1: Title -->
+            <div class="slide active flex-col text-center">
+                <h1 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300 mb-4">Gestión de Inventarios</h1>
+                <p class="text-xl text-gray-300">Una guía completa de los fundamentos y modelos clave.</p>
+            </div>
+
+            <!-- Slide 2: Definición de Inventario -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-6">1. ¿Qué es un Inventario?</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-8">Es la acumulación de bienes, materiales y productos que una empresa posee para vender o usar en su producción. Es un pilar de la cadena de suministro.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                    <div class="card p-4 rounded-lg"><h3 class="font-bold text-blue-300">Materias Primas</h3><p class="text-sm text-gray-400">Insumos para fabricar.</p></div>
+                    <div class="card p-4 rounded-lg"><h3 class="font-bold text-blue-300">En Proceso (WIP)</h3><p class="text-sm text-gray-400">Artículos semi-terminados.</p></div>
+                    <div class="card p-4 rounded-lg"><h3 class="font-bold text-blue-300">Productos Terminados</h3><p class="text-sm text-gray-400">Listos para la venta.</p></div>
+                    <div class="card p-4 rounded-lg"><h3 class="font-bold text-blue-300">Suministros (MRO)</h3><p class="text-sm text-gray-400">Para mantenimiento y operación.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Costos de Inventario -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-8">2. Criterios de Costo de un Inventario</h2>
+                <div class="grid md:grid-cols-3 gap-6 w-full">
+                    <div class="card p-6 rounded-xl text-center">
+                        <h3 class="text-2xl font-semibold text-cyan-300 mb-2">Costo de Pedido</h3>
+                        <p class="text-gray-400">Gastos por cada orden de compra o preparación (transporte, procesamiento).</p>
+                    </div>
+                    <div class="card p-6 rounded-xl text-center">
+                        <h3 class="text-2xl font-semibold text-cyan-300 mb-2">Costo de Mantenimiento</h3>
+                        <p class="text-gray-400">Costos por almacenar (alquiler, seguros, capital, obsolescencia).</p>
+                    </div>
+                    <div class="card p-6 rounded-xl text-center">
+                        <h3 class="text-2xl font-semibold text-cyan-300 mb-2">Costo de Agotamiento</h3>
+                        <p class="text-gray-400">Costos por falta de stock (ventas perdidas, pérdida de reputación).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Modelo Determinístico -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-6">3. Modelo Determinístico</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Asume que la **demanda** y otros parámetros son conocidos con **certeza** y no varían. Son ideales para entornos estables y predecibles.</p>
+                <p class="mt-6 font-semibold">Ejemplos comunes:</p>
+                <ul class="list-disc list-inside text-gray-400 mt-2">
+                    <li>Cantidad Económica de Pedido (CEP / EOQ)</li>
+                    <li>Lote Económico de Producción (EPQ)</li>
+                    <li>Modelos con descuentos o faltantes</li>
+                </ul>
+            </div>
+            
+            <!-- Slide 5: Modelo CEP y ROP -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-6">4. Modelo CEP y Punto de Reorden</h2>
+                <div class="grid md:grid-cols-2 gap-8 w-full">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-semibold mb-4">Cantidad Económica de Pedido (CEP)</h3>
+                        <p class="text-gray-400 mb-4">Calcula la cantidad óptima de pedido.</p>
+                        <div class="card p-4 rounded-lg font-mono text-xl text-teal-300">Q* = &radic;((2DS) / H)</div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-semibold mb-4">Punto de Reorden (ROP)</h3>
+                        <p class="text-gray-400 mb-4">Indica cuándo se debe hacer un pedido.</p>
+                        <div class="card p-4 rounded-lg font-mono text-xl text-teal-300">ROP = d &times; L</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: CEP con Descuento -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-6">5. Modelo de CEP con Descuento</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Considera que los proveedores ofrecen **precios más bajos por unidad** si se compran grandes cantidades.</p>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto mt-4">El objetivo es determinar si conviene aprovechar el descuento, balanceando el ahorro en la compra con el mayor costo de mantenimiento.</p>
+            </div>
+            
+            <!-- Slide 7: CEP con Agotamiento -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-6">6. Modelo de CEP con Agotamiento</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Este modelo permite **faltantes planeados (backorders)**. Se aplica cuando el costo de una rotura de stock es medible y los clientes están dispuestos a esperar.</p>
+                 <p class="text-lg text-gray-300 max-w-3xl mx-auto mt-4">Calcula la cantidad óptima a pedir y la cantidad máxima de faltante que se permitirá acumular.</p>
+            </div>
+
+            <!-- Slide 8: Lote de Producción (EPQ) -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-6">7. Modelo de Lote de Producción (EPQ)</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-6">Se aplica cuando la empresa **produce sus propios artículos**. El inventario se acumula gradualmente a medida que se produce, no en un solo lote.</p>
+                <div class="card p-4 rounded-lg font-mono text-xl text-teal-300">Q* = &radic;((2DS) / (H(1-d/p)))</div>
+                 <div class="text-sm mt-4 text-gray-400">p: tasa de producción, d: tasa de demanda</div>
+            </div>
+
+            <!-- Slide 9: Clasificación ABC -->
+             <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-8">8. Sistemas de Clasificación ABC</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-6">Categoriza el inventario basado en el **Principio de Pareto (80/20)** para enfocar los esfuerzos de gestión.</p>
+                <div class="grid md:grid-cols-3 gap-4 w-full text-left">
+                    <div class="card p-4 rounded-lg border-l-4 border-red-400"><h3 class="font-bold text-red-400">Clase A</h3><p class="text-sm text-gray-400">~20% de artículos, ~80% del valor. Control estricto.</p></div>
+                    <div class="card p-4 rounded-lg border-l-4 border-yellow-400"><h3 class="font-bold text-yellow-400">Clase B</h3><p class="text-sm text-gray-400">~30% de artículos, ~15% del valor. Control moderado.</p></div>
+                    <div class="card p-4 rounded-lg border-l-4 border-green-400"><h3 class="font-bold text-green-400">Clase C</h3><p class="text-sm text-gray-400">~50% de artículos, ~5% del valor. Control simple.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Revisión Periódica -->
+            <div class="slide flex-col text-center">
+                <h2 class="text-4xl font-bold mb-6">9. Sistema de Revisión Periódica</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">El inventario se revisa en **intervalos de tiempo fijos (P)**.</p>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto mt-4">En cada revisión, se pide una **cantidad variable** de producto para llevar el stock hasta un nivel máximo u objetivo (M).</p>
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="absolute bottom-8 left-0 right-0 px-8 flex justify-between items-center">
+            <button id="prev-btn" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">&larr; Anterior</button>
+            <div id="slide-counter" class="text-gray-400 text-sm"></div>
+            <button id="next-btn" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">Siguiente &rarr;</button>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideCounter = document.getElementById('slide-counter');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+            });
+
+            slides[index].classList.add('active');
+            slideCounter.textContent = `Diapositiva ${index + 1} de ${slides.length}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Initialize the first slide
+        showSlide(currentSlide);
+    });
+</script>
+
+</body>
+</html>
